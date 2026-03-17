@@ -23,7 +23,7 @@ class GameEngine {
             chests = mutableListOf(
                 Chest(
                     id = "wooden_chest",
-                    name = "Ornate Chest",
+                    name = "Wooden Chest",
                     isLocked = false,
                     isOpen = false,
                     contents = mutableListOf(
@@ -202,7 +202,7 @@ class GameEngine {
         val exit = currentRoom().exits[direction]
         return if (exit != null) {
             player.currentRoomId = exit
-            "You head in $direction"
+            "You head $direction"
         } else {
             "You can't go that way."
         }
@@ -288,6 +288,15 @@ class GameEngine {
             return "Examine what exactly?"
         }
 
+        // Check lootables by name
+        val lootable = currentRoom().lootables.find { it.name.lowercase().contains(target.lowercase()) }
+        if (lootable != null ) {
+            return if (lootable.isLooted)
+                "${lootable.description}\n\nYou've already taken everything."
+            else
+                lootable.description
+        }
+
         // Check chests by name
         val chest = currentRoom().chests.find { it.name.lowercase().contains(target.lowercase()) }
         if (chest != null) {
@@ -327,8 +336,10 @@ class GameEngine {
                 }
                 else -> {
                     lootable.isLooted = true
-                    lootable.description
-                    "You find:\n" + lootable.items.joinToString("\n") { " - ${it.name}" }
+                    val itemList = lootable.items.joinToString("\n") { " - ${it.name}" }
+                    lootable.items.forEach { currentRoom().items.add(it) }
+                    lootable.items.clear()
+                    "${lootable.description}\n\nYou find:\n$itemList\n\nUse 'take <item>' to pick something up."
                 }
             }
         }
@@ -401,6 +412,30 @@ class GameEngine {
                 "You can't use that key here."
             }
             else -> "You're not sure how to use that."
+        }
+    }
+
+    fun getRoomDescription(): String {
+        val room = currentRoom()
+        val base = room.description
+
+        return when (room.id) {
+            "altar_room" -> if (player.hasItem("lit_torch"))
+                "$base\n\nThe torchlight catches something in the shadows." +
+                        "\nA small key glints on the stone floor beside the altar."
+            else base
+            "barracks" -> {
+                val chestInfo = room.chests.joinToString("\n") { chest ->
+                    val status = when {
+                        chest.isLocked -> "locked"
+                        chest.isOpen -> "open"
+                        else -> "unlocked"
+                    }
+                    "${chest.name} ($status)"
+                }
+                "$base\n\n$chestInfo"
+            }
+            else -> base
         }
     }
 

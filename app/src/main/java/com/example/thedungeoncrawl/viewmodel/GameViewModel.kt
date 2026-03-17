@@ -10,7 +10,7 @@ import com.example.thedungeoncrawl.engine.GameEngine
 class GameViewModel : ViewModel() {
     private val engine = GameEngine()
 
-    var roomDescription by mutableStateOf(engine.currentRoom().description)
+    var roomDescription by mutableStateOf(engine.getRoomDescription())
         private set
 
     var outputLog by mutableStateOf(listOf<String>())
@@ -29,7 +29,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun updateState(result: String) {
-        roomDescription = engine.currentRoom().description
+        roomDescription = engine.getRoomDescription()
         inventory = engine.player.inventory.toList()
         exits = engine.currentRoom().exits.keys.toList()
         outputLog = outputLog + result
