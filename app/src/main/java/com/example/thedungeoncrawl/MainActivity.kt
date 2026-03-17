@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.thedungeoncrawl.ui.screens.GameScreen
+import com.example.thedungeoncrawl.ui.screens.HelpScreen
 import com.example.thedungeoncrawl.ui.screens.SplashScreen
 import com.example.thedungeoncrawl.ui.theme.TheDungeonCrawlTheme
 
@@ -32,7 +33,14 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable("game") {
-                        GameScreen()
+                        GameScreen(
+                            onHelpPressed = { navController.navigate("help") }
+                        )
+                    }
+                    composable("help") {
+                        HelpScreen(
+                            onBack = { navController.navigateUp() }
+                        )
                     }
                 }
             }
