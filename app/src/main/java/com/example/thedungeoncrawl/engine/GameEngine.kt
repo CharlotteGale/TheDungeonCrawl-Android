@@ -288,6 +288,15 @@ class GameEngine {
             return "Examine what exactly?"
         }
 
+        // Check lootables by name
+        val lootable = currentRoom().lootables.find { it.name.lowercase().contains(target.lowercase()) }
+        if (lootable != null ) {
+            return if (lootable.isLooted)
+                "${lootable.description}\n\nYou've already taken everything."
+            else
+                lootable.description
+        }
+
         // Check chests by name
         val chest = currentRoom().chests.find { it.name.lowercase().contains(target.lowercase()) }
         if (chest != null) {
@@ -327,8 +336,10 @@ class GameEngine {
                 }
                 else -> {
                     lootable.isLooted = true
-                    lootable.description
-                    "You find:\n" + lootable.items.joinToString("\n") { " - ${it.name}" }
+                    val itemList = lootable.items.joinToString("\n") { " - ${it.name}" }
+                    lootable.items.forEach { currentRoom().items.add(it) }
+                    lootable.items.clear()
+                    "${lootable.description}\n\nYou find:\n$itemList\n\nUse 'take <item>' to pick something up."
                 }
             }
         }
