@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.thedungeoncrawl.ui.screens.GameScreen
+import com.example.thedungeoncrawl.ui.screens.SplashScreen
 import com.example.thedungeoncrawl.ui.theme.TheDungeonCrawlTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,9 +22,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             TheDungeonCrawlTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    GameScreen(
+                    SplashScreen(
+                        onEnterDungeon = {},
                         modifier = Modifier.padding(innerPadding)
                     )
+//                    GameScreen(
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
                 }
             }
         }
