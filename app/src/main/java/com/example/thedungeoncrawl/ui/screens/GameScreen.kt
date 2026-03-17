@@ -18,6 +18,7 @@ import com.example.thedungeoncrawl.viewmodel.GameViewModel
 @Composable
 fun GameScreen(
     viewModel: GameViewModel = viewModel(),
+    onHelpPressed: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -30,6 +31,10 @@ fun GameScreen(
                 .padding(innerPadding)
                 .padding(8.dp)
         ) {
+            HelpPanel(
+                onFullHelp = onHelpPressed,
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
             RoomDescription(
                 description = viewModel.roomDescription,
                 modifier = Modifier.weight(0.35f)
