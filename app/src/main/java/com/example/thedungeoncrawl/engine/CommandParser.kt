@@ -15,6 +15,7 @@ object CommandParser {
             "loot", "grab" -> Command.Loot(argument)
             "examine", "ex", "inspect", "x" -> Command.Examine(argument)
             "use" -> Command.Use(argument)
+            "read" -> Command.Read(argument)
             "help", "h", "?" -> Command.Help
             "quit", "exit", "q" -> Command.Quit
             else -> Command.Unknown

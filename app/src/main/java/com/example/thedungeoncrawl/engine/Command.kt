@@ -8,6 +8,7 @@ sealed class Command {
     data class Loot(val target: String) : Command()
     data class Examine(val target: String) : Command()
     data class Use(val itemName: String) : Command()
+    data class Read(val itemName: String) : Command()
     object Inventory : Command()
     object Help : Command()
     object Quit : Command()

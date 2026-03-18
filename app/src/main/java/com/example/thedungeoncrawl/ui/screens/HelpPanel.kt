@@ -61,7 +61,7 @@ fun HelpPanel(
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                Text("go <direction>     — move north, south, east, west",
+                Text("d-pad              — navigate north, south, east, west",
                     fontSize = 12.sp, color = DungeonLightGrey)
                 Text("take <item>        — pick up an item",
                     fontSize = 12.sp, color = DungeonLightGrey)

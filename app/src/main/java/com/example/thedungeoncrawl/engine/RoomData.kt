@@ -29,7 +29,15 @@ val dungeonRooms: Map<String, Room> = mapOf(
                         id = "scroll",
                         name = "Scroll",
                         description = "A rolled scroll tied with a leather cord. " +
-                                "The wax seal bears the same sigil as the altar to the north."
+                                "The wax seal bears the same sigil as the altar to the north.",
+                        readable = "The writing is hurried, scratched by someone who knew their time was short.\n\n" +
+                                "— To move: use the compass on screen\n" +
+                                "— To search a body: 'loot <name>'\n" +
+                                "— To open containers: 'open <name>'\n" +
+                                "— To inspect: 'examine <name>'\n" +
+                                "— To take items: 'loot <name>' or 'take <item>'\n" +
+                                "— To use something: 'use <item>'\n\n" +
+                                "Whatever you do — don't touch the lever."
                     )
                 )
             )
@@ -122,7 +130,13 @@ val dungeonRooms: Map<String, Room> = mapOf(
                         name = "Soldiers Journal",
                         description = "A leather bound journal, its pages yellowed and brittle. " +
                                 "The last entry is dated, but the ink has run. " +
-                                "One word is still legible: 'below'."
+                                "One word is still legible: 'below'.",
+                        readable = "Most pages are stuck together with damp. Only the last entry is legible.\n\n" +
+                                "'We sealed the lower level three days ago. Malachar's orders. " +
+                                "Harwick asked what was down there. Nobody answered him.\n\n" +
+                                "Harwick didn't come to mess this morning.\n\n" +
+                                "I don't think we sealed it to keep something in.\n\n" +
+                                "I think we sealed it to keep us out.'"
                     )
                 )
             )

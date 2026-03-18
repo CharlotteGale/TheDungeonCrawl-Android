@@ -22,8 +22,9 @@ class GameEngine {
             is Command.Loot -> handleLoot(command.target)
             is Command.Examine -> handleExamine(command.target)
             is Command.Use -> handleUse(command.itemName)
+            is Command.Read -> handleRead(command.itemName)
             is Command.Inventory -> handleInventory()
-            is Command.Unknown -> "You mutter to yourself. Nothing happens. \nType 'help' for a list of commands."
+            is Command.Unknown -> "You mutter to yourself. Nothing happens. \nExpand the 'Help' section above or click the '?' for a list of commands."
         }
     }
 
@@ -259,6 +260,20 @@ class GameEngine {
             }
             else -> "You're not sure how to use that."
         }
+    }
+
+    fun handleRead(itemName: String): String {
+        if (itemName.isEmpty()) return "Read what, exactly?"
+
+        val item = player.inventory.find {
+            it.name.lowercase().contains(itemName.lowercase()) ||
+                    it.id.lowercase().contains(itemName.lowercase())
+        }
+
+        if (item == null) return "You aren't carrying anything called '$itemName'."
+
+        return item.readable
+            ?: "There's nothing to read about ${item.name}."
     }
 
     fun getRoomDescription(): String {
