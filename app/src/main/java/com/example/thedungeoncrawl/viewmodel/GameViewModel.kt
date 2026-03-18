@@ -22,6 +22,18 @@ class GameViewModel : ViewModel() {
     var exits by mutableStateOf(engine.currentRoom().exits.keys.toList())
         private set
 
+    var visitedRooms by mutableStateOf(engine.getVisitedRooms())
+        private set
+
+    var currentRoomId by mutableStateOf(engine.player.currentRoomId)
+        private set
+
+    var roomMarkers by mutableStateOf((engine.getRoomMarkers()))
+        private set
+
+    var hasMap by mutableStateOf(engine.player.hasItem("dungeon_map"))
+        private set
+
     fun onCommand(input: String) {
         val command = CommandParser.parse(input)
         val result = engine.handleCommand(command)
@@ -33,5 +45,9 @@ class GameViewModel : ViewModel() {
         inventory = engine.player.inventory.toList()
         exits = engine.currentRoom().exits.keys.toList()
         outputLog = outputLog + result
+        visitedRooms = engine.getVisitedRooms()
+        currentRoomId = engine.player.currentRoomId
+        roomMarkers = engine.getRoomMarkers()
+        hasMap = engine.player.hasItem("dungeon_map")
     }
 }

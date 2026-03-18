@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -11,6 +12,7 @@ import com.example.thedungeoncrawl.ui.screens.GameScreen
 import com.example.thedungeoncrawl.ui.screens.HelpScreen
 import com.example.thedungeoncrawl.ui.screens.SplashScreen
 import com.example.thedungeoncrawl.ui.theme.TheDungeonCrawlTheme
+import com.example.thedungeoncrawl.viewmodel.GameViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class MainActivity : ComponentActivity() {
                             onBack = { navController.navigateUp() }
                         )
                     }
+
                 }
             }
         }

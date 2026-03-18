@@ -12,10 +12,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import com.example.thedungeoncrawl.ui.composables.CommandInput
 import com.example.thedungeoncrawl.ui.composables.DirectionPad
+import com.example.thedungeoncrawl.ui.composables.DungeonMap
 import com.example.thedungeoncrawl.ui.composables.HelpPanel
 import com.example.thedungeoncrawl.ui.composables.InventoryPanel
 import com.example.thedungeoncrawl.ui.composables.OutputLog
 import com.example.thedungeoncrawl.ui.composables.RoomDescription
+import com.example.thedungeoncrawl.ui.retroBorder
 import com.example.thedungeoncrawl.ui.theme.DungeonBlack
 import com.example.thedungeoncrawl.ui.theme.TheDungeonCrawlTheme
 import com.example.thedungeoncrawl.viewmodel.GameViewModel
@@ -62,15 +64,27 @@ fun GameScreen(
 
             HorizontalDivider()
 
-            DirectionPad(
-                exits = viewModel.exits,
-                onDirectionPressed = { direction ->
-                    viewModel.onCommand("go $direction")
-                },
-                modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .align(Alignment.CenterHorizontally)
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ){
+                DungeonMap(
+                    visitedRooms = viewModel.visitedRooms,
+                    currentRoomId = viewModel.currentRoomId,
+                    roomMarkers = viewModel.roomMarkers,
+                    isMiniMap = true,
+                    modifier = Modifier
+                        .size(150.dp)
+                        .retroBorder()
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                DirectionPad(
+                    exits = viewModel.exits,
+                    onDirectionPressed = { direction ->
+                        viewModel.onCommand("go $direction")
+                    },
+                    modifier = Modifier.weight(1f))
+            }
 
             HorizontalDivider()
 

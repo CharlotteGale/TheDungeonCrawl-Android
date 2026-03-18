@@ -1,13 +1,13 @@
 package com.example.thedungeoncrawl.engine
 
-import com.example.thedungeoncrawl.model.Chest
 import com.example.thedungeoncrawl.model.Item
-import com.example.thedungeoncrawl.model.Lootable
 import com.example.thedungeoncrawl.model.Player
 import com.example.thedungeoncrawl.model.Room
+import com.example.thedungeoncrawl.model.RoomMarkers
 
 class GameEngine {
     private val rooms: Map<String, Room> = dungeonRooms
+    private val visitedRooms = mutableSetOf("entrance")
 
     val player = Player(currentRoomId = "entrance", inventory = mutableListOf())
 
@@ -40,6 +40,7 @@ class GameEngine {
         val exit = currentRoom().exits[direction]
         return if (exit != null) {
             player.currentRoomId = exit
+            visitedRooms.add(player.currentRoomId)
             "You head $direction"
         } else {
             "You can't go that way."
@@ -236,6 +237,7 @@ class GameEngine {
                 if (currentRoom().id == "entrance") {
                     player.dropItem("mess_room_key")
                     player.currentRoomId = "mess_room"
+                    visitedRooms.add("mess_room")
                     "The key grinds in the lock. The door opens with a groan of rusty hinges, but jams on the flagstone. You can just fit through."
                 } else {
                     "There's no lock here for this key."
@@ -297,6 +299,18 @@ class GameEngine {
                 "$base\n\n$chestInfo"
             }
             else -> base
+        }
+    }
+
+    fun getVisitedRooms(): Set<String> = visitedRooms.toSet()
+
+    fun getRoomMarkers(): Map<String, RoomMarkers> {
+        return rooms.mapValues { (_, room) ->
+            RoomMarkers(
+                hasChest = room.chests.isNotEmpty(),
+                hasLootable = room.lootables.any { !it.isLooted },
+                hasItems = room.items.isNotEmpty()
+            )
         }
     }
 
