@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,86 +37,94 @@ fun HelpScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val scrollState = rememberScrollState()
-
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .background(DungeonBlack)
-            .padding(16.dp)
+    Scaffold(
+        modifier = modifier.fillMaxSize()
     ) {
-        //Header
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)
-        ) {
-            Button(
-                onClick = onBack,
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = DungeonRed),
-                modifier = Modifier.retroBorder()
-            ) {
-                Text("◄ Back")
-            }
-            Spacer(modifier = Modifier.width(16.dp))
-            Text(
-                text = "HELP",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = DungeonRed,
-                letterSpacing = 4.sp
-            )
-        }
+        innerPadding ->
 
-        HorizontalDivider(color = DungeonRed, thickness = 1.dp)
-        Spacer(modifier = Modifier.height(16.dp))
+        val scrollState = rememberScrollState()
 
         Column(
-            modifier = Modifier.verticalScroll(scrollState)
+            modifier = modifier
+                .fillMaxSize()
+                .background(DungeonBlack)
+                .padding(innerPadding)
+                .padding(16.dp)
         ) {
-            //Commands Section
-            HelpSection(title = "COMMANDS") {
-                HelpEntry("go <direction>", "Move in a direction — north, south, east, west")
-                HelpEntry("take <item>", "Pick up an item from the room")
-                HelpEntry("drop <item>", "Drop an item from your inventory")
-                HelpEntry("open <target>", "Open a chest or attempt a door")
-                HelpEntry("examine <target>", "Inspect an item, chest or body closely")
-                HelpEntry("loot <target>", "Loot a chest or body for items")
-                HelpEntry("use <item>", "Use an item from your inventory")
-                HelpEntry("inventory", "List everything you're carrying")
+            //Header
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            ) {
+                Button(
+                    onClick = onBack,
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(containerColor = DungeonRed),
+                    modifier = Modifier.retroBorder()
+                ) {
+                    Text("◄ Back")
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Text(
+                    text = "HELP",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = DungeonRed,
+                    letterSpacing = 4.sp
+                )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-            HorizontalDivider(color = DungeonMidGrey, thickness = 0.5.dp)
+            HorizontalDivider(color = DungeonRed, thickness = 1.dp)
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Mechanics Section
-            HelpSection(title = "MECHANICS") {
-                HelpEntry("Chests", "Open a chest first, then examine it to see the contents, then loot to take them.")
-                HelpEntry("Keys", "Keys are used with 'use <key>'. Stand in the right room — a key won't work somewhere it doesn't belong.")
-                HelpEntry("Torches", "Some areas are too dark to search without light. Find a torch and use it.")
-                HelpEntry("Doors", "Some doors are jammed or locked. There's always a reason they won't open.")
-                HelpEntry("Lootables", "Bodies and containers can be looted. Examine them first to see what they're carrying.")
+            Column(
+                modifier = Modifier.verticalScroll(scrollState)
+            ) {
+                //Commands Section
+                HelpSection(title = "COMMANDS") {
+                    HelpEntry("go <direction>", "Move in a direction — north, south, east, west")
+                    HelpEntry("take <item>", "Pick up an item from the room")
+                    HelpEntry("drop <item>", "Drop an item from your inventory")
+                    HelpEntry("open <target>", "Open a chest or attempt a door")
+                    HelpEntry("examine <target>", "Inspect an item, chest or body closely")
+                    HelpEntry("loot <target>", "Loot a chest or body for items")
+                    HelpEntry("use <item>", "Use an item from your inventory")
+                    HelpEntry("inventory", "List everything you're carrying")
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(color = DungeonMidGrey, thickness = 0.5.dp)
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Mechanics Section
+                HelpSection(title = "MECHANICS") {
+                    HelpEntry("Chests", "Open a chest first, then examine it to see the contents, then loot to take them.")
+                    HelpEntry("Keys", "Keys are used with 'use <key>'. Stand in the right room — a key won't work somewhere it doesn't belong.")
+                    HelpEntry("Torches", "Some areas are too dark to search without light. Find a torch and use it.")
+                    HelpEntry("Doors", "Some doors are jammed or locked. There's always a reason they won't open.")
+                    HelpEntry("Lootables", "Bodies and containers can be looted. Examine them first to see what they're carrying.")
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(color = DungeonMidGrey, thickness = 0.5.dp)
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Lore Hints Section
+                HelpSection(title = "NOTES FROM A PREVIOUS ADVENTURER") {
+                    HelpHint("The altar room feels watched. Something about that sigil.")
+                    HelpHint("The torches in the corridor don't flicker. Torches always flicker.")
+                    HelpHint("I counted the mouse droppings in the mess room. There were none.")
+                    HelpHint("Whatever made that footprint in the supply store... it came from inside.")
+                    HelpHint("The journal says 'below'. I haven't found the way down yet.")
+                }
+
+                Spacer(modifier = Modifier.height(32.dp))
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            HorizontalDivider(color = DungeonMidGrey, thickness = 0.5.dp)
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Lore Hints Section
-            HelpSection(title = "NOTES FROM A PREVIOUS ADVENTURER") {
-                HelpHint("The altar room feels watched. Something about that sigil.")
-                HelpHint("The torches in the corridor don't flicker. Torches always flicker.")
-                HelpHint("I counted the mouse droppings in the mess room. There were none.")
-                HelpHint("Whatever made that footprint in the supply store... it came from inside.")
-                HelpHint("The journal says 'below'. I haven't found the way down yet.")
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
         }
     }
+
 }
 
 @Composable
