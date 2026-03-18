@@ -84,7 +84,7 @@ fun HelpScreen(
             ) {
                 //Commands Section
                 HelpSection(title = "COMMANDS") {
-                    HelpEntry("go <direction>", "Move in a direction — north, south, east, west")
+                    HelpEntry("d-pad", "Navigate north, south, east, west")
                     HelpEntry("take <item>", "Pick up an item from the room")
                     HelpEntry("drop <item>", "Drop an item from your inventory")
                     HelpEntry("open <target>", "Open a chest or attempt a door")
