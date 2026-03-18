@@ -30,9 +30,7 @@ class GameEngine {
     fun handleGo(direction: String): String {
          if (currentRoom().id == "entrance" && direction == "west") {
             return if (player.hasItem("mess_room_key")) {
-                player.dropItem("mess_room_key")
-                player.currentRoomId = "mess_room"
-                currentRoom().description
+                "The door is locked. You'll need to use the key."
             } else {
                 "You throw your shoulder against the door. The rusted hinges groan but don't give. It isn't going anywhere without help."
             }
@@ -232,6 +230,15 @@ class GameEngine {
             }
             item.id == "lit_torch" -> {
                 "The torch is already lit."
+            }
+            item.id == "mess_room_key" -> {
+                if (currentRoom().id == "entrance") {
+                    player.dropItem("mess_room_key")
+                    player.currentRoomId = "mess_room"
+                    "The key grinds in the lock. The door opens with a groan of rusty hinges, but jams on the flagstone. You can just fit through."
+                } else {
+                    "There's no lock here for this key."
+                }
             }
             item.id.endsWith("_key") -> {
                 val targetId = item.id.removeSuffix("_key")

@@ -16,7 +16,7 @@ val dungeonRooms: Map<String, Room> = mapOf(
                 "\nSlumped against the western wall is a skeleton, its bony fingers still curled around nothing. Whatever it was carrying is long gone. " +
                 "\nBeside it sits a wooden chest, its lid closed but unlocked. " +
                 "\nBehind you to the south, a sliver of daylight cuts through the gloom — the way out.",
-        exits = mapOf("north" to "altar_room", "east" to "corridor", "south" to "exit"),
+        exits = mapOf("north" to "altar_room", "east" to "corridor", "south" to "exit", "west" to "mess_room"),
         items = mutableListOf(),
         chests = mutableListOf(
             Chest(
