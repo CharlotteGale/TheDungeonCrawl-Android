@@ -10,6 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import com.example.thedungeoncrawl.ui.composables.CommandInput
+import com.example.thedungeoncrawl.ui.composables.DirectionPad
+import com.example.thedungeoncrawl.ui.composables.HelpPanel
+import com.example.thedungeoncrawl.ui.composables.InventoryPanel
+import com.example.thedungeoncrawl.ui.composables.OutputLog
+import com.example.thedungeoncrawl.ui.composables.RoomDescription
 import com.example.thedungeoncrawl.ui.theme.DungeonBlack
 import com.example.thedungeoncrawl.ui.theme.TheDungeonCrawlTheme
 import com.example.thedungeoncrawl.viewmodel.GameViewModel
