@@ -1,4 +1,4 @@
-package com.example.thedungeoncrawl.ui.screens
+package com.example.thedungeoncrawl.ui.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,7 +53,7 @@ fun OutputLog(
                 state = scrollState,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(80.dp)
                     .padding(8.dp)
             ) {
                 items(messages) { message ->
