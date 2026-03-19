@@ -90,6 +90,7 @@ fun DungeonMap(
                 val isCurrent = room.id == currentRoomId
                 val isLocked = room.isLocked
 
+                if (isMiniMap && (isLocked || !isVisited)) return@forEach
                 if (!isVisited && !isLocked) return@forEach
 
                 val left = room.x * cellSize + padding
@@ -151,7 +152,7 @@ fun DungeonMap(
                         drawText(
                             textMeasurer = textMeasurer,
                             text = "X",
-                            topLeft = Offset(left + width / 2 - 4f, top + height / 2),
+                            topLeft = Offset(left + 4f, top + height - 20f),
                             style = TextStyle(color = DungeonRed, fontSize = 10.sp)
                         )
                     }
@@ -160,7 +161,7 @@ fun DungeonMap(
                         drawText(
                             textMeasurer = textMeasurer,
                             text = "T",
-                            topLeft = Offset(left + width / 2 + 8f, top + height / 2),
+                            topLeft = Offset(left + 16f, top + height - 20f),
                             style = TextStyle(color = DungeonLightGrey, fontSize = 10.sp)
                         )
                     }

@@ -11,9 +11,7 @@ val dungeonMapLayout = listOf(
     MapRoom("exit", "EXIT", 2f, 3.5f, 1f, 1f),
     MapRoom("supply_store", "SUPPLY ROOM",   0f, 3.5f, 2f, 1f),
     MapRoom("north_corridor", "NORTH CORRIDOR", 0f, 0f, 0.4f, 1.5f, isLocked = true, isCorridor = true),
-    MapRoom("locked_door_1", "",             4f, 1.5f, 0.6f, 0.5f, isLocked = true),
-    MapRoom("locked_door_2", "",             4f, 2.4f, 0.6f, 0.5f, isLocked = true),
-)
+    )
 
 val dungeonConnections = listOf(
     "entrance" to "altar_room",

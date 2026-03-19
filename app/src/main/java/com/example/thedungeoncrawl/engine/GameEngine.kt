@@ -9,11 +9,7 @@ class GameEngine {
     private val rooms: Map<String, Room> = dungeonRooms
     private val visitedRooms = mutableSetOf("entrance")
 
-    val player = Player(currentRoomId = "entrance", inventory = mutableListOf(Item(
-        id = "dungeon_map",
-        name = "Dungeon Map",
-        description = "A rough map of the dungeon, its edges gnawed away."
-    )))
+    val player = Player(currentRoomId = "entrance", inventory = mutableListOf())
 
     fun handleCommand(command: Command): String {
         return when (command) {
