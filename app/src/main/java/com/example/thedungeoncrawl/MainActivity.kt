@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.thedungeoncrawl.ui.screens.GameScreen
 import com.example.thedungeoncrawl.ui.screens.HelpScreen
+import com.example.thedungeoncrawl.ui.screens.MapScreen
 import com.example.thedungeoncrawl.ui.screens.SplashScreen
 import com.example.thedungeoncrawl.ui.theme.TheDungeonCrawlTheme
 import com.example.thedungeoncrawl.viewmodel.GameViewModel
@@ -21,6 +22,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             TheDungeonCrawlTheme {
                 val navController = rememberNavController()
+                val gameViewModel: GameViewModel = viewModel()
+
                 NavHost(
                     navController = navController,
                     startDestination = "splash"
@@ -36,7 +39,9 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("game") {
                         GameScreen(
-                            onHelpPressed = { navController.navigate("help") }
+                            viewModel = gameViewModel,
+                            onHelpPressed = { navController.navigate("help") },
+                            onMapPressed = { navController.navigate("map")}
                         )
                     }
                     composable("help") {
@@ -44,7 +49,15 @@ class MainActivity : ComponentActivity() {
                             onBack = { navController.navigateUp() }
                         )
                     }
-
+                    composable("map") {
+                        MapScreen(
+                            visitedRooms = gameViewModel.visitedRooms,
+                            currentRoomId = gameViewModel.currentRoomId,
+                            roomMarkers = gameViewModel.roomMarkers,
+                            hasMap = gameViewModel.hasMap,
+                            onBack = { navController.navigateUp() }
+                        )
+                    }
                 }
             }
         }

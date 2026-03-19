@@ -53,7 +53,7 @@ fun OutputLog(
                 state = scrollState,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(80.dp)
                     .padding(8.dp)
             ) {
                 items(messages) { message ->

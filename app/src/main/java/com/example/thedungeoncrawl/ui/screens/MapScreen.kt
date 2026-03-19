@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.thedungeoncrawl.model.RoomMarkers
 import com.example.thedungeoncrawl.ui.composables.DungeonMap
 import com.example.thedungeoncrawl.ui.retroBorder
 import com.example.thedungeoncrawl.ui.theme.*
